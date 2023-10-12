@@ -18,6 +18,40 @@ app.get('/campgrounds', async (req, res) => {
   })
 })
 
+app.get('/campgrounds/:id/new', async (req, res) => {
+  const campground = await Campground.findById(req.params.id)
+})
+
+app.get('/campgrounds/:id', async (req, res) => {
+  const campground = await Campground.findById(req.params.id)
+  console.log(campground)
+  return res.status(200).json({
+    data: campground,
+  })
+})
+
+app.post('/campgrounds/new', async (req, res) => {
+  try {
+    if (
+      !req.body.name ||
+      !req.body.price ||
+      !req.body.description ||
+      !req.body.location
+    ) {
+      return res.status(400).send({
+        message:
+          'Please send all required fields: name, price, description, location',
+      })
+    }
+    const newCampground = new Campground(req.body)
+    await newCampground.save()
+    return res.status(201).send(newCampground)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ message: error.message })
+  }
+})
+
 // const newCampground = new Campground({
 //   name: 'Desert Wonderland',
 //   price: 100,
