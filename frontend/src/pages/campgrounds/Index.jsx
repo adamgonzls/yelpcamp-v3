@@ -11,9 +11,9 @@ const Index = () => {
       .then((data) => setAllCampgrounds(data.data))
   }, [])
 
-  console.log(allCampgrounds)
+  // console.log(allCampgrounds)
   const campgroundElements = allCampgrounds.map((campground) => (
-    <Campground campgroundData={campground} />
+    <Campground key={campground._id} campgroundData={campground} />
   ))
   return <div>{campgroundElements}</div>
 }
