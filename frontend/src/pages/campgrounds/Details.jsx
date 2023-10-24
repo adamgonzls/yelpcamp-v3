@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { formatUSD } from '../../utilities/utilities'
 
 const Details = () => {
@@ -11,7 +11,7 @@ const Details = () => {
     const fetchData = async () => {
       const data = await fetch(`http://localhost:5555/campgrounds/${id}`)
       const json = await data.json()
-      console.log(json)
+      // console.log(json)
       setCampground(json.data)
       setLoading(false)
     }
@@ -21,6 +21,10 @@ const Details = () => {
       setLoading(false)
     })
   }, [])
+
+  function handleDelete() {
+    console.log(`Delete ${campground._id}`)
+  }
 
   return (
     <>
@@ -34,6 +38,8 @@ const Details = () => {
           <span>{campground.location}</span>
           <br />
           <span>{formatUSD.format(campground.price)} night</span>
+          <Link to={`/campgrounds/${campground._id}/edit`}>Edit</Link>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       )}
     </>

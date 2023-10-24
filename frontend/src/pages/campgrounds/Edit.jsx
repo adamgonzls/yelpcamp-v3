@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
-const New = () => {
+const Edit = () => {
+  const { id } = useParams()
   const [formData, setFormData] = useState({
     name: '',
     price: 0,
@@ -12,10 +14,23 @@ const New = () => {
   })
   const [loading, setLoading] = useState(false)
 
-  function handleSaveCampground() {
-    const newCampground = { ...formData }
+  useEffect(() => {
     axios
-      .post('http://localhost:5555/campgrounds', newCampground)
+      .get(`http://localhost:5555/campgrounds/${id}`)
+      .then((res) => {
+        console.log(res)
+        setFormData(res.data.data)
+      })
+      .catch((error) => {
+        alert('An error occurred, please check console')
+        console.log(error)
+      })
+  }, [])
+
+  function handleEditCampground() {
+    const campground = { ...formData }
+    axios
+      .put(`http://localhost:5555/campgrounds/${id}`, campground)
       .then((res) => {
         console.log(res)
       })
@@ -35,7 +50,7 @@ const New = () => {
 
   return (
     <div>
-      <h1>Add New Campground</h1>
+      <h1>Edit Campground</h1>
       <form>
         <div>
           <label htmlFor='name'>Campground Name:</label>
@@ -89,10 +104,10 @@ const New = () => {
             onChange={handleChange}
           />
         </div>
-        <button onClick={handleSaveCampground}>Add New Campground</button>
+        <button onClick={handleEditCampground}>Update {}</button>
       </form>
     </div>
   )
 }
 
-export default New
+export default Edit
