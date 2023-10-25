@@ -5,8 +5,10 @@ const MainNav = () => {
   return (
     <header className='header'>
       <nav className='navigation--default'>
-        <Link to='/'>YelpCamp</Link>
-        <Link to='/campgrounds'>All Campgrounds</Link>
+        <Link className='font-accent' to='/'>
+          YelpCamp
+        </Link>
+        <Link to='/campgrounds'>Campgrounds</Link>
         <Link to='/campgrounds/new'>Add Campground</Link>
       </nav>
     </header>

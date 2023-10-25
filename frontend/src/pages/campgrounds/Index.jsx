@@ -15,7 +15,7 @@ const Index = () => {
   const campgroundElements = allCampgrounds.map((campground) => (
     <Campground key={campground._id} campgroundData={campground} />
   ))
-  return <div>{campgroundElements}</div>
+  return <div className='campground--grid'>{campgroundElements}</div>
 }
 
 export default Index
