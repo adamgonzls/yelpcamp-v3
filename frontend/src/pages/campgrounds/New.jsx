@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const New = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     price: 0,
@@ -12,17 +14,19 @@ const New = () => {
   })
   const [loading, setLoading] = useState(false)
 
-  function handleSaveCampground() {
+  const handleSaveCampground = async () => {
     const newCampground = { ...formData }
-    axios
-      .post('http://localhost:5555/campgrounds', newCampground)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        alert('an error occurred')
-        console.log(error)
-      })
+    try {
+      const res = await axios.post(
+        'http://localhost:5555/campgrounds',
+        newCampground
+      )
+      // console.log(res)
+      navigate(`/campgrounds/${res.data._id}`)
+    } catch (error) {
+      alert('an error occurred')
+      console.log(error)
+    }
   }
 
   function handleChange(event) {
@@ -36,7 +40,7 @@ const New = () => {
   return (
     <div>
       <h1>Add New Campground</h1>
-      <form>
+      <div>
         <div>
           <label htmlFor='name'>Campground Name:</label>
           <input
@@ -90,7 +94,7 @@ const New = () => {
           />
         </div>
         <button onClick={handleSaveCampground}>Add New Campground</button>
-      </form>
+      </div>
     </div>
   )
 }

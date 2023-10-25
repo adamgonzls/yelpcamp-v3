@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const Edit = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     price: 0,
@@ -18,7 +19,7 @@ const Edit = () => {
     axios
       .get(`http://localhost:5555/campgrounds/${id}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setFormData(res.data.data)
       })
       .catch((error) => {
@@ -27,17 +28,19 @@ const Edit = () => {
       })
   }, [])
 
-  function handleEditCampground() {
+  const handleEditCampground = async () => {
     const campground = { ...formData }
-    axios
-      .put(`http://localhost:5555/campgrounds/${id}`, campground)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        alert('an error occurred')
-        console.log(error)
-      })
+    try {
+      const res = await axios.put(
+        `http://localhost:5555/campgrounds/${id}`,
+        campground
+      )
+      console.log(res)
+      navigate(`/campgrounds/${id}`)
+    } catch (error) {
+      alert('an error occurred')
+      console.log(error)
+    }
   }
 
   function handleChange(event) {
@@ -51,7 +54,7 @@ const Edit = () => {
   return (
     <div>
       <h1>Edit Campground</h1>
-      <form>
+      <div>
         <div>
           <label htmlFor='name'>Campground Name:</label>
           <input
@@ -105,7 +108,7 @@ const Edit = () => {
           />
         </div>
         <button onClick={handleEditCampground}>Update {}</button>
-      </form>
+      </div>
     </div>
   )
 }

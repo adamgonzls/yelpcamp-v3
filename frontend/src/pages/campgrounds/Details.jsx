@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { formatUSD } from '../../utilities/utilities'
 
 const Details = () => {
   const [campground, setCampground] = useState()
   const { id } = useParams()
   const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,8 +24,14 @@ const Details = () => {
     })
   }, [])
 
-  function handleDelete() {
-    console.log(`Delete ${campground._id}`)
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:5555/campgrounds/${id}`)
+      navigate('/campgrounds')
+    } catch (error) {
+      alert('An error occurred, please check console')
+      console.log(error)
+    }
   }
 
   return (
