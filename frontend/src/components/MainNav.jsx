@@ -5,7 +5,7 @@ const MainNav = () => {
   return (
     <header className='header'>
       <nav className='navigation--default'>
-        <Link className='font-accent' to='/'>
+        <Link className='font-accent logo' to='/'>
           YelpCamp
         </Link>
         <Link to='/campgrounds'>Campgrounds</Link>

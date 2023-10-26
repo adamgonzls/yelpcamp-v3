@@ -7,9 +7,16 @@ const Campground = ({ campgroundData }) => {
 
   return (
     <div>
-      <span>{campgroundData.location}</span>
       <h2>{campgroundData.name}</h2>
-      <span>{formatUSD.format(campgroundData.price)} night</span>
+      <p className='campground-grid--tagline'>"{campgroundData.tagline}"</p>
+      <span className='campground-grid--bold'>{campgroundData.location}</span>
+      <br />
+      <span>
+        <span className='campground-grid--bold'>
+          {formatUSD.format(campgroundData.price)}
+        </span>{' '}
+        night
+      </span>
       <br />
       <Link to={`/campgrounds/${campgroundData._id}`}>
         View {campgroundData.name}

@@ -7,8 +7,9 @@ const Edit = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
-    price: 0,
+    tagline: '',
     description: '',
+    price: 0,
     location: '',
     image: '',
     featured: false,
@@ -64,6 +65,17 @@ const Edit = () => {
             onChange={handleChange}
             name='name'
             value={formData.name}
+          />
+        </div>
+        <div>
+          <label htmlFor='tagline'>Campground Tagline:</label>
+          <input
+            id='tagline'
+            type='text'
+            placeholder='Wonderful trail situated along the mountainside'
+            onChange={handleChange}
+            name='tagline'
+            value={formData.tagline}
           />
         </div>
         <div>

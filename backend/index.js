@@ -4,8 +4,9 @@ const app = express()
 import 'dotenv/config'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import { Campground } from './models/campground.js'
-import campgroundRoutes from './routes/campgrounds.js'
+
+import router from './routes/index.js'
+import campgroundsRouter from './routes/campgrounds.js'
 
 app.use(cors())
 // app.use(
@@ -17,11 +18,9 @@ app.use(cors())
 // )
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/campgrounds', campgroundRoutes)
 
-app.get('/', (req, res) => {
-  res.send('YelpCamp Version 3')
-})
+app.use('/', router)
+app.use('/campgrounds', campgroundsRouter)
 
 // const newCampground = new Campground({
 //   name: 'Desert Wonderland',

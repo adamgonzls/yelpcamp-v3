@@ -1,21 +1,28 @@
 import express from 'express'
 import { Campground } from '../models/campground.js'
-const router = express.Router()
+const campgroundRouter = express.Router()
 
-router.get('/', async (req, res) => {
+campgroundRouter.get('/', async (req, res) => {
   const campgrounds = await Campground.find({})
-  console.log(campgrounds)
+  console.log('routes/campgrounds.js')
+  // console.log(campgrounds)
   return res.status(200).json({
     count: campgrounds.length,
     data: campgrounds,
   })
 })
 
-router.get('/:id/edit', (req, res) => {
-  // edit campground form
+campgroundRouter.get('/featured', async (req, res) => {
+  const campgrounds = await Campground.find({ featured: true })
+  console.log('/featured route')
+  // console.log(campgrounds)
+  return res.status(200).json({
+    count: campgrounds.length,
+    data: campgrounds,
+  })
 })
 
-router.get('/:id', async (req, res) => {
+campgroundRouter.get('/:id', async (req, res) => {
   const campground = await Campground.findById(req.params.id)
   console.log(campground)
   return res.status(200).json({
@@ -23,11 +30,7 @@ router.get('/:id', async (req, res) => {
   })
 })
 
-router.get('/new', async (req, res) => {
-  // new campground form
-})
-
-router.post('/', async (req, res) => {
+campgroundRouter.post('/', async (req, res) => {
   try {
     if (
       !req.body.name ||
@@ -49,7 +52,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.put('/:id', async (req, res) => {
+campgroundRouter.put('/:id', async (req, res) => {
   try {
     if (
       !req.body.name ||
@@ -73,7 +76,7 @@ router.put('/:id', async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) => {
+campgroundRouter.delete('/:id', async (req, res) => {
   try {
     const campground = await Campground.findByIdAndDelete(req.params.id)
     if (!campground) {
@@ -87,4 +90,4 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-export default router
+export default campgroundRouter

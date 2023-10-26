@@ -2,36 +2,19 @@
   --ff-primary: 'Open Sans', sans-serif;
   --ff-secondary: 'Pacifico', cursive;
   --ff-accent: 'Pacifico', cursive;
+  --brand-accent: #b90012;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
-  font-synthesis: none;
+  /* font-synthesis: none; */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--ff-primary);
-  margin: 0;
-}
-
-a {
-  display: inline-block;
-  padding: 0.25em;
-  font-weight: 500;
-  color: #242424;
-  text-decoration: none;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -39,6 +22,28 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: var(--ff-primary);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--ff-secondary);
+  font-weight: normal;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  display: inline-block;
+  color: #242424;
+  text-decoration: none;
+}
+a:hover {
+  /* color: #535bf2; */
+  font-weight: bold;
 }
 
 h1 {
@@ -71,7 +76,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    /* color: #747bff; */
   }
   button {
     background-color: #f9f9f9;
@@ -98,15 +103,30 @@ button:focus-visible {
   border: 1px solid red;
 }
 
+.logo {
+  color: var(--brand-accent);
+  font-size: 2em;
+  text-shadow: 1px 1px #555;
+}
+
 .navigation--default {
   display: flex;
+  align-items: center;
   gap: 1em;
 }
 
-.campground--grid {
+.campground-grid {
+  margin-top: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
+}
+
+.campground-grid--bold {
+  font-weight: bold;
+}
+
+.campground-grid__tagline {
 }
 
 .footer--secondary {

@@ -41,7 +41,7 @@ const Details = () => {
       ) : (
         <div>
           <h1>{campground.name}</h1>
-          <h2>Campground Details:</h2>
+          <p>{campground.tagline}</p>
           <p>{campground.description}</p>
           <span>{campground.location}</span>
           <br />
