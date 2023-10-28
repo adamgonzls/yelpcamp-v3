@@ -41,6 +41,11 @@ const Details = () => {
       ) : (
         <div>
           <h1>{campground.name}</h1>
+          <img
+            className='campground-grid__image'
+            src={campground.image}
+            alt=''
+          />
           <p>{campground.tagline}</p>
           <p>{campground.description}</p>
           <span>{campground.location}</span>

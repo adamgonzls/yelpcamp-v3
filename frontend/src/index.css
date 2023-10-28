@@ -48,6 +48,10 @@ h1 {
   font-size: 2.5em;
 }
 
+img {
+  max-width: 100%;
+}
+
 .button {
   padding: 0.5em 1.75em;
   border-radius: 0.75em;
@@ -110,6 +114,7 @@ button:focus-visible {
 }
 
 .footer {
+  margin-top: 1em;
   border: 1px solid red;
 }
 
@@ -142,6 +147,13 @@ button:focus-visible {
   border-radius: 0.75em;
 }
 
+.campground-grid__image {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .campground-grid--bold {
   font-weight: bold;
 }
@@ -153,6 +165,11 @@ button:focus-visible {
 .campground-grid--location {
   display: inline-block;
   margin-top: 0.5em;
+}
+
+.campground-grid--link {
+  margin-top: 0.5em;
+  font-weight: bold;
 }
 
 .campground-grid--navigation {

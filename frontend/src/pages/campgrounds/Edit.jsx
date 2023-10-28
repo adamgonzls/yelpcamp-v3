@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
+const unsplashAccessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY
+const unsplashAPIEndpoint = import.meta.env.VITE_UNSPLASH_API_URL
 
 const Edit = () => {
   const { id } = useParams()
@@ -52,6 +54,25 @@ const Edit = () => {
     }))
   }
 
+  const handleGetImage = async () => {
+    console.log(unsplashAccessKey)
+    try {
+      const res = await axios.get(unsplashAPIEndpoint, {
+        headers: {
+          Authorization: `Client-ID ${unsplashAccessKey}`,
+        },
+      })
+      console.log(res)
+      const randomPhoto =
+        res.data[Math.floor(Math.random() * res.data.length)].urls.regular
+      console.log(randomPhoto)
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        image: randomPhoto,
+      }))
+    } catch (error) {}
+  }
+
   return (
     <div>
       <h1>Edit Campground</h1>
@@ -66,6 +87,24 @@ const Edit = () => {
             name='name'
             value={formData.name}
           />
+        </div>
+        <div>
+          <label htmlFor='image'>Campground Image:</label>
+          <input
+            id='image'
+            type='text'
+            placeholder='Campground Image'
+            onChange={handleChange}
+            name='image'
+            value={formData.image}
+          />
+          <p>Need a placeholder?</p>
+          <button onClick={handleGetImage}>Get an Image</button>
+          {formData.image ? (
+            <img className='campground-grid__image' src={formData.image} />
+          ) : (
+            'No Image'
+          )}
         </div>
         <div>
           <label htmlFor='tagline'>Campground Tagline:</label>

@@ -8,6 +8,11 @@ const Campground = ({ campgroundData }) => {
   return (
     <div className='campground-grid__container'>
       <h2>{campgroundData.name}</h2>
+      <img
+        className='campground-grid__image'
+        src={campgroundData.image}
+        alt=''
+      />
       <p className='campground-grid--tagline'>"{campgroundData.tagline}"</p>
       <span className='campground-grid--bold campground-grid--location'>
         {campgroundData.location}
@@ -20,7 +25,10 @@ const Campground = ({ campgroundData }) => {
         night
       </span>
       <br />
-      <Link to={`/campgrounds/${campgroundData._id}`}>
+      <Link
+        className='campground-grid--link'
+        to={`/campgrounds/${campgroundData._id}`}
+      >
         View {campgroundData.name}
       </Link>
     </div>
