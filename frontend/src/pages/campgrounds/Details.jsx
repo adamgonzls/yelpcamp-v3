@@ -46,8 +46,17 @@ const Details = () => {
           <span>{campground.location}</span>
           <br />
           <span>{formatUSD.format(campground.price)} night</span>
-          <Link to={`/campgrounds/${campground._id}/edit`}>Edit</Link>
-          <button onClick={handleDelete}>Delete</button>
+          <div className='campground-grid--navigation'>
+            <Link
+              className='button button--primary'
+              to={`/campgrounds/${campground._id}/edit`}
+            >
+              Edit
+            </Link>
+            <button className='button button--primary' onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
         </div>
       )}
     </>

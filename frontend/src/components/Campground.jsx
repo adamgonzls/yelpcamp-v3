@@ -6,10 +6,12 @@ const Campground = ({ campgroundData }) => {
   // console.log(campgroundData)
 
   return (
-    <div>
+    <div className='campground-grid__container'>
       <h2>{campgroundData.name}</h2>
       <p className='campground-grid--tagline'>"{campgroundData.tagline}"</p>
-      <span className='campground-grid--bold'>{campgroundData.location}</span>
+      <span className='campground-grid--bold campground-grid--location'>
+        {campgroundData.location}
+      </span>
       <br />
       <span>
         <span className='campground-grid--bold'>

@@ -91,12 +91,12 @@ const Edit = () => {
         </div>
         <div>
           <label htmlFor='description'>Description:</label>
-          <input
-            type='text'
-            placeholder='Description'
-            onChange={handleChange}
+          <textarea
             name='description'
+            id='description'
+            onChange={handleChange}
             value={formData.description}
+            placeholder='Description'
           />
         </div>
         <div>
